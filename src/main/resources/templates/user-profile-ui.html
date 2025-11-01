@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Controller</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile Controller</h1>
+        <p>Interactive testing interface for UserProfileController endpoints.</p>
+
+        <div class="endpoint-section">
+            <h2>Profile Display Endpoints</h2>
+            <div class="endpoint-grid">
+                <div class="endpoint-card">
+                    <div class="endpoint-title">
+                        Display Profile
+                        <span class="security-badge vulnerable">VULNERABLE</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-display-msg">Message:</label>
+                        <input type="text" id="profile-display-msg" placeholder="Enter message..." value="Welcome">
+                    </div>
+                    <button class="btn" onclick="testEndpoint('/profile/display', 'profile-display-msg', 'profile-display-result')">
+                        Test Endpoint
+                    </button>
+                    <div id="profile-display-result"></div>
+                </div>
+
+                <div class="endpoint-card">
+                    <div class="endpoint-title">
+                        Secure Profile Display
+                        <span class="security-badge secure">SECURE</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="profile-secure-msg">Message:</label>
+                        <input type="text" id="profile-secure-msg" placeholder="Enter message..." value="Welcome">
+                    </div>
+                    <button class="btn btn-success" onclick="testEndpoint('/profile/secureDisplay', 'profile-secure-msg', 'profile-secure-result')">
+                        Test Secure Endpoint
+                    </button>
+                    <div id="profile-secure-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint-section">
+            <h2>Status Display Endpoints</h2>
+            <div class="endpoint-grid">
+                <div class="endpoint-card">
+                    <div class="endpoint-title">
+                        User Status
+                        <span class="security-badge vulnerable">VULNERABLE</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="status-msg">Status Message:</label>
+                        <input type="text" id="status-msg" placeholder="Enter status..." value="Active">
+                    </div>
+                    <button class="btn" onclick="testEndpoint('/profile/status', 'status-msg', 'status-result')">
+                        Test Status
+                    </button>
+                    <div id="status-result"></div>
+                </div>
+
+                <div class="endpoint-card">
+                    <div class="endpoint-title">
+                        Secure User Status
+                        <span class="security-badge secure">SECURE</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="secure-status-msg">Status Message:</label>
+                        <input type="text" id="secure-status-msg" placeholder="Enter status..." value="Active">
+                    </div>
+                    <button class="btn btn-success" onclick="testEndpoint('/profile/secureStatus', 'secure-status-msg', 'secure-status-result')">
+                        Test Secure Status
+                    </button>
+                    <div id="secure-status-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint-section">
+            <h2>Dashboard Endpoints</h2>
+            <div class="endpoint-grid">
+                <div class="endpoint-card">
+                    <div class="endpoint-title">
+                        Dashboard Greeting
+                        <span class="security-badge vulnerable">VULNERABLE</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="dashboard-greeting">Greeting:</label>
+                        <input type="text" id="dashboard-greeting" placeholder="Enter greeting..." value="Welcome">
+                    </div>
+                    <button class="btn" onclick="testGreetingEndpoint('/dashboard/greeting', 'dashboard-greeting', 'dashboard-result')">
+                        Test Dashboard
+                    </button>
+                    <div id="dashboard-result"></div>
+                </div>
+
+                <div class="endpoint-card">
+                    <div class="endpoint-title">
+                        Secure Dashboard
+                        <span class="security-badge secure">SECURE</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="secure-dashboard-greeting">Greeting:</label>
+                        <input type="text" id="secure-dashboard-greeting" placeholder="Enter greeting..." value="Welcome">
+                    </div>
+                    <button class="btn btn-success" onclick="testGreetingEndpoint('/dashboard/secureGreeting', 'secure-dashboard-greeting', 'secure-dashboard-result')">
+                        Test Secure Dashboard
+                    </button>
+                    <div id="secure-dashboard-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint-section">
+            <h2>Notification Template Endpoints</h2>
+            <div class="endpoint-grid">
+                <div class="endpoint-card">
+                    <div class="endpoint-title">
+                        Message Template
+                        <span class="security-badge vulnerable">VULNERABLE</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="template-content">Content:</label>
+                        <input type="text" id="template-content" placeholder="Enter content..." value="New Message">
+                    </div>
+                    <button class="btn" onclick="testNotificationEndpoint('/notifications/template', 'template-content', 'template-result')">
+                        Test Template
+                    </button>
+                    <div id="template-result"></div>
+                </div>
+
+                <div class="endpoint-card">
+                    <div class="endpoint-title">
+                        Secure Template
+                        <span class="security-badge secure">SECURE</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="secure-template-content">Content:</label>
+                        <input type="text" id="secure-template-content" placeholder="Enter content..." value="New Message">
+                    </div>
+                    <button class="btn btn-success" onclick="testNotificationEndpoint('/notifications/secureTemplate', 'secure-template-content', 'secure-template-result')">
+                        Test Secure Template
+                    </button>
+                    <div id="secure-template-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint-section">
+            <h2>Notification Generate Endpoints</h2>
+            <div class="endpoint-grid">
+                <div class="endpoint-card">
+                    <div class="endpoint-title">
+                        Message Generate
+                        <span class="security-badge vulnerable">VULNERABLE</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="generate-content">Content:</label>
+                        <input type="text" id="generate-content" placeholder="Enter content..." value="New Message">
+                    </div>
+                    <button class="btn" onclick="testNotificationEndpoint('/notifications/generate', 'generate-content', 'generate-result')">
+                        Test Generate
+                    </button>
+                    <div id="generate-result"></div>
+                </div>
+
+                <div class="endpoint-card">
+                    <div class="endpoint-title">
+                        Secure generate
+                        <span class="security-badge secure">SECURE</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="secure-template-content">Content:</label>
+                        <input type="text" id="secure-generate-content" placeholder="Enter content..." value="New Message">
+                    </div>
+                    <button class="btn btn-success" onclick="testNotificationEndpoint('/notifications/secureGenerate', 'secure-generate-content', 'secure-generate-result')">
+                        Test Secure generate
+                    </button>
+                    <div id="secure-generate-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint-section">
+            <h2>Message Builder Endpoints</h2>
+            <div class="endpoint-grid">
+                <div class="endpoint-card">
+                    <div class="endpoint-title">
+                        Message Display
+                        <span class="security-badge vulnerable">VULNERABLE</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-display">Message:</label>
+                        <input type="text" id="message-display" placeholder="Enter message..." value="Welcome">
+                    </div>
+                    <button class="btn" onclick="testEndpoint('/message/display', 'message-display', 'message-display-result')">
+                        Test Message Builder
+                    </button>
+                    <div id="message-display-result"></div>
+                </div>
+
+                <div class="endpoint-card">
+                    <div class="endpoint-title">
+                        Secure Message Display
+                        <span class="security-badge secure">SECURE</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="secure-message-display">Message:</label>
+                        <input type="text" id="secure-message-display" placeholder="Enter message..." value="Welcome">
+                    </div>
+                    <button class="btn btn-success" onclick="testEndpoint('/message/secureDisplay', 'secure-message-display', 'secure-message-display-result')">
+                        Test Secure Builder
+                    </button>
+                    <div id="secure-message-display-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint-section">
+            <h2>Message Format Endpoints</h2>
+            <div class="endpoint-grid">
+                <div class="endpoint-card">
+                    <div class="endpoint-title">
+                        Message Format
+                        <span class="security-badge vulnerable">VULNERABLE</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-format">Message:</label>
+                        <input type="text" id="message-format" placeholder="Enter message..." value="Welcome">
+                    </div>
+                    <button class="btn" onclick="testEndpoint('/message/format', 'message-format', 'message-format-result')">
+                        Test Message Builder
+                    </button>
+                    <div id="message-format-result"></div>
+                </div>
+
+                <div class="endpoint-card">
+                    <div class="endpoint-title">
+                        Secure Message Format
+                        <span class="security-badge secure">SECURE</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="secure-message-display">Message:</label>
+                        <input type="text" id="secure-message-format" placeholder="Enter message..." value="Welcome">
+                    </div>
+                    <button class="btn btn-success" onclick="testEndpoint('/message/escape', 'secure-message-format', 'secure-message-format-result')">
+                        Test Secure Format
+                    </button>
+                    <div id="secure-message-format-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="endpoint-section">
+            <h2>XSS Testing</h2>
+            <div class="test-payloads">
+                <h4>Test Payloads:</h4>
+                <div class="payload-list">
+                    <div style="margin-bottom: 10px;">
+                        <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code>
+                        <button class="btn btn-warning" style="margin-left: 10px; padding: 5px 10px; font-size: 12px;"
+                                onclick="document.querySelectorAll('input[type=text]').forEach(input => input.value = '<script>alert(\'XSS\')</script>')">
+                            Fill All Fields
+                        </button>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <code>&lt;img src=x onerror=alert('XSS')&gt;</code>
+                        <button class="btn btn-warning" style="margin-left: 10px; padding: 5px 10px; font-size: 12px;"
+                                onclick="document.querySelectorAll('input[type=text]').forEach(input => input.value = '<img src=x onerror=alert(\'XSS\')>')">
+                            Fill All Fields
+                        </button>
+                    </div>
+                </div>
+                <div style="margin-top: 15px;">
+                    <button class="btn btn-secondary" onclick="document.querySelectorAll('input[type=text]').forEach(input => input.value = '')">
+                        Clear All Fields
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <a href="/" class="btn btn-secondary">Home</a>
+        </div>
+    </div>
+
+    <script src="/js/profile-ui.js"></script>
+</body>
+</html>
