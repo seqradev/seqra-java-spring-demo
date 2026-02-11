@@ -32,6 +32,25 @@ public class RedirectController {
         response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
     }
 
+    @GetMapping("/tracking")
+    @Operation(summary = "Track and redirect", description = "Tracks click and redirects with tracking info")
+    public void trackAndRedirect(
+            @Parameter(description = "Destination URL") @RequestParam String destination,
+            @Parameter(description = "Tracking ID") @RequestParam(required = false) String trackingId,
+            @Parameter(description = "Campaign name") @RequestParam(required = false) String campaign,
+            HttpServletResponse response) throws IOException {
+
+        if (trackingId != null) {
+            response.setHeader("X-Tracking-ID", trackingId);
+        }
+
+        if (campaign != null) {
+            response.setHeader("X-Campaign", campaign);
+        }
+
+        response.sendRedirect(destination);
+    }
+
     @PostMapping("/custom-response")
     @Operation(summary = "Custom response headers", description = "Returns response with custom headers")
     public ResponseEntity<Map<String, Object>> customResponse(
@@ -48,6 +67,29 @@ public class RedirectController {
         );
 
         return new ResponseEntity<>(responseBody, headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/cache-control")
+    @Operation(summary = "Set cache control", description = "Returns response with custom cache control headers")
+    public void setCacheControl(
+            @Parameter(description = "Cache control directive") @RequestParam String directive,
+            @Parameter(description = "Additional headers") @RequestParam(required = false) String additionalHeaders,
+            HttpServletResponse response) throws IOException {
+
+        response.setHeader("Cache-Control", directive);
+
+        if (additionalHeaders != null && !additionalHeaders.isEmpty()) {
+            String[] headers = additionalHeaders.split(";");
+            for (String header : headers) {
+                String[] parts = header.split(":", 2);
+                if (parts.length == 2) {
+                    response.setHeader(parts[0].trim(), parts[1].trim());
+                }
+            }
+        }
+
+        response.setContentType("application/json");
+        response.getWriter().write("{\"status\":\"success\",\"cacheControl\":\"" + directive + "\"}");
     }
 
     @GetMapping("/content-disposition")
