@@ -27,4 +27,4 @@ jobs:
 
       - uses: seqra/seqra-action@v2
         with:
-          upload-sarif: 'true'
+          upload-sarif: 'false'
