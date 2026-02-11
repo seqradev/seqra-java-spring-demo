@@ -1,7 +1,14 @@
 name: Security Scan on PR
 
 on:
-  pull_request
+  push:
+    branches:
+      - main
+      - 'demo/**'
+  pull_request:
+    branches:
+      - main
+      - 'demo/**'
 
 permissions:
   contents: read
@@ -67,20 +74,4 @@ jobs:
           if [ -f app.pid ]; then
             kill $(cat app.pid) || true
             rm app.pid
-          fi
-
-      - name: Check scan results
-        if: always()
-        shell: bash
-        run: |
-          if [ -f "${{ steps.security-scan.outputs.results-file }}" ]; then
-            confirmed=$(jq '.summary.confirmed' "${{ steps.security-scan.outputs.results-file }}")
-            echo "Security scan found $confirmed confirmed vulnerabilities"
-            
-            # Display summary but don't fail the build
-            if [ "$confirmed" -gt "0" ]; then
-              echo "::warning::Found $confirmed confirmed vulnerabilities. Review the scan results artifact for details."
-            else
-              echo "::notice::No confirmed vulnerabilities found"
-            fi
           fi
